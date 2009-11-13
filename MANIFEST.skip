@@ -1,0 +1,14 @@
+^_build
+^Build$
+^blib
+~$
+\.bak$
+\.svn/
+^CVS/
+/CVS/
+Makefile.PL
+^MANIFEST\.skip$
+.releaserc
+Finance-Card-Citibank-[\d.]+.tar.gz
+Finance-Card-Citibank-[\d.]+.tar
+t.pl

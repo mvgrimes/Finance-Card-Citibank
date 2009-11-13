@@ -1,0 +1,28 @@
+---
+name: Finance-Card-Citibank
+version: 1.81
+author:
+  - 'Mark Grimes <mgrimes@cpan.org>'
+abstract: Check your Citigroup credit card accounts from Perl
+license: perl
+resources:
+  license: http://dev.perl.org/licenses/
+requires:
+  Carp: 0
+  Class::Accessor::Fast: 0
+  HTML::Element: 0
+  HTML::TreeBuilder::XPath: 0
+  WWW::Mechanize: 1
+build_requires:
+  File::Spec: 0
+  Test::More: 0
+provides:
+  Finance::Card::Citibank:
+    file: lib/Finance/Card/Citibank.pm
+    version: 1.81
+  Finance::Card::Citibank::Account:
+    file: lib/Finance/Card/Citibank.pm
+generated_by: Module::Build version 0.280801
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2
