@@ -12,4 +12,3 @@ t/99-podcoverage.t
 t/perlcriticrc
 samples/get_balances.pl
 META.yml                                 Module meta-data (added by MakeMaker)
-Makefile.PL
