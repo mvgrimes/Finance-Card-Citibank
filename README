@@ -13,15 +13,17 @@ SYNOPSIS
           printf "%20s : %8s / %8s : USD %9.2f\n",
           $_->name, $_->sort_code, $_->account_no, $_->balance;
       }
-  
+
 DESCRIPTION
-    This module provides a rudimentary interface to Citigroup online at
-    `https://www.citibank.com/us/cards/index.jsp'. You will need either
-    `Crypt::SSLeay' or `IO::Socket::SSL' installed for HTTPS support to
-    work. `WWW::Mechanize' is required. =head1 CLASS METHODS
+    This module provides a rudimentary interface to Citigroup's credit card
+    balances. You will need either "Crypt::SSLeay" or "IO::Socket::SSL"
+    installed for HTTPS support to work. Version 2.01 was a re-write to use
+    the OFX interface rather than screen scraping. This should make the
+    module more stable as the screen scrapping method required updates
+    whenever there were changes to Citigroup's site.
 
+CLASS METHODS
   check_balance()
-
       check_balance( usename => $u, password => $p )
 
     Return an array of account objects, one for each of your bank accounts.
@@ -40,7 +42,7 @@ OBJECT METHODS
     Return the account balance as a signed floating point value.
 
 WARNING
-    This warning is verbatim from Simon Cozens' `Finance::Bank::LloydsTSB',
+    This warning is verbatim from Simon Cozens' "Finance::Bank::LloydsTSB",
     and certainly applies to this module as well.
 
     This is code for online banking, and that means your money, and that
@@ -50,8 +52,12 @@ WARNING
     but is provided under NO GUARANTEE, explicit or implied.
 
 THANKS
-    Simon Cozens for `Finance::Bank::LloydsTSB'. The interface to this
+    Simon Cozens for "Finance::Bank::LloydsTSB". The interface to this
     module, some code and the pod were all taken from Simon's module.
+
+    Brandon Fosdick's for his Finance::OFX module. I was unable to use the
+    modules outright as their is quite a bit that differs between bank and
+    credit card OFX, but some of his parsing routines were very helpful.
 
     Jon Keller added the ability to pull multiple accounts.
 
@@ -59,7 +65,7 @@ AUTHOR
     Mark Grimes <mgrimes@cpan.org>
 
 COPYRIGHT AND LICENSE
-    Copyright (C) 2005-8 by mgrimes
+    Copyright (C) 2005-10 by mgrimes
 
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself, either Perl version 5.8.2 or, at

@@ -1,0 +1,8 @@
+Changes for Finance::Card::Citibank:
+
+2.01 - Thu Oct 14 13:57:22 EDT 2010
+    Re-write to use OFX interface rather than screen scraping
+    - Citi move to aspnet style forms which require javascript support
+      (or lost of kludges to fake javascript)
+    - Should be much more stable
+

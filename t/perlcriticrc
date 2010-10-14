@@ -1,4 +1,0 @@
-# [-CodeLayout::ProhibitHardTabs]
-[-RegularExpressions::RequireExtendedFormatting]
-[-Modules::ProhibitMultiplePackages]
-

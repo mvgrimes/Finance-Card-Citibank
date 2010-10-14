@@ -12,3 +12,9 @@ Makefile.PL
 Finance-Card-Citibank-[\d.]+.tar.gz
 Finance-Card-Citibank-[\d.]+.tar
 t.pl
+^\.git/
+^.gitignore$
+^expr/
+^tmp/
+^MYMETA.yml$
+^\.*.swp$

@@ -59,14 +59,7 @@ sub _get_accounts {
     my $content = $self->_retrive_accounts;
 
     my ( $ofx_header, $ofx_body ) = split /\n\n/, $content, 2;
-    my $tree = parse($ofx_body)
-      or confess "Unable to parse response from ofx server";
-    $tree = collapse($tree);
-
-    my $resp_code = $tree->{ofx}{signonmsgsrsv1}{sonrs}{status}{code};
-    if ( undef $resp_code or $resp_code ) {    # Undef or not 0
-        confess "Error in response from ofx server: $ofx_body";
-    }
+    my $tree = $self->_parse( $content );
 
     my $accntinfo =
       $tree->{ofx}{signupmsgsrsv1}{acctinfotrnrs}{acctinfors}{acctinfo};
@@ -77,16 +70,9 @@ sub _get_accounts {
 
 sub _get_account_balance {
     my ( $self, $account ) = @_;
-    my $content = $self->_retrive_account_balance($account);
-    my ( $ofx_header, $ofx_body ) = split /\n\n/, $content, 2;
-    my $tree = parse($ofx_body)
-      or confess "Unable to parse response from ofx server";
-    $tree = collapse($tree);
 
-    my $resp_code = $tree->{ofx}{signonmsgsrsv1}{sonrs}{status}{code};
-    if ( undef $resp_code or $resp_code ) {    # Undef or not 0
-        confess "Error in response from ofx server: $ofx_body";
-    }
+    my $content = $self->_retrive_account_balance($account);
+    my $tree = $self->_parse( $content );
 
     exists $tree->{ofx}{creditcardmsgsrsv1}{ccstmttrnrs}{ccstmtrs}{ledgerbal}
       {balamt}
@@ -252,8 +238,10 @@ ACCNT_REQ
 
 }
 
-sub parse {
-    my $source = shift;
+sub _parse {
+    my ($self,$content) = @_;
+
+    my ( $ofx_header, $ofx_body ) = split /\n\n/, $content, 2;
 
     my @tree;
     my @stack;
@@ -292,11 +280,19 @@ sub parse {
             'dtext'
         ] );
     $p->unbroken_text(1);   # Want element contents in single blocks to facilita
-    $p->parse($source);
-    \@tree;
+    $p->parse($ofx_body);
+
+    my $tree = _collapse(\@tree);
+    my $resp_code = $tree->{ofx}{signonmsgsrsv1}{sonrs}{status}{code};
+    if ( undef $resp_code or $resp_code ) {    # Undef or not 0
+        confess "Error in response from ofx server: $ofx_body";
+    }
+
+    return $tree;
+
 }
 
-sub is_unique {
+sub _is_unique {
     my $a = shift;
     return undef unless ref($a) eq 'ARRAY';
     my %saw;
@@ -304,17 +300,17 @@ sub is_unique {
     1;
 }
 
-sub collapse {
+sub _collapse {
     my $tree = shift;
     return $tree unless ref($tree) eq 'ARRAY';
 
     # Recurse on any elements that have arrays for content
-    $_->{content} = collapse( $_->{content} ) for ( @{$tree} );
+    $_->{content} = _collapse( $_->{content} ) for ( @{$tree} );
 
     # The passed array can be converted to a hash if all of it's nodes have
     #  unique names
     my %a;
-    if ( is_unique($tree) ) {
+    if ( _is_unique($tree) ) {
         $a{ $_->{name} } = $_->{content} for ( @{$tree} );
     } else    # Duplicate names can be converted to an array
     {

@@ -2,10 +2,11 @@ Build
 MYMETA.yml
 _build/
 blib/
-Finance-Card-Citi-*
+Finance-Card-Citi*
 Changes.bak
 tmp.log
 META.yml
+MANIFEST.bak
 
 *.swp
 
