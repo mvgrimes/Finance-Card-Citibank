@@ -19,8 +19,10 @@ plan tests => 3;
 my @accounts = Finance::Card::Citibank->check_balance(
     			'username'	=> $userid,
     			'password'	=> $passwd,
-                # 'log'       => 'out.html',        ## debugging: where to save the page
-                # 'content'   => 'out.html',        ## debugging: file to use rather than using their website
+                # 'log'       => 'tmp/out.html',        ## debugging: where to save the page
+                # 'content'   => 'tmp/out.html',        ## debugging: file to use rather than using their website
+                # 'log2'      => 'tmp/out2.html',       ## debugging: where to save the page
+                # 'content2'  => 'tmp/out2.html',       ## debugging: file to use rather than using their website
 		 );
 
 ok @accounts, "check_balance returned a non-empty array";

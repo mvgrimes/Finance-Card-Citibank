@@ -1,0 +1,13 @@
+Build
+MYMETA.yml
+_build/
+blib/
+Finance-Card-Citi-*
+Changes.bak
+tmp.log
+META.yml
+
+*.swp
+
+expr/
+tmp/

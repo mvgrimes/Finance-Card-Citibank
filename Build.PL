@@ -6,17 +6,13 @@ my $build = Module::Build->new(
     create_readme => 1,
     ## create_makefile_pl => 'passthrough',
     requires => {
-        'Carp'                     => 0,
-        'WWW::Mechanize'           => 1.00,
-        'Crypt::SSLeay'            => 0,
-        'Class::Accessor::Fast'    => 0,
-        'HTML::TreeBuilder::XPath' => 0,
-        'HTML::Element'            => 0,
+        'Carp'                  => 0,
+        'LWP'                   => 0,
+        'Crypt::SSLeay'         => 0,
+        'Class::Accessor::Fast' => 0,
+        'HTML::Parser'          => 0,
     },
-    build_requires => {
-        'Test::More' => 0,
-        'File::Spec' => 0,
-    },
+    build_requires => { 'Test::More' => 0, },
     add_to_cleanup => [ 'Finance-Card-Citibank-*', 'Debian_CPANTS.txt' ],
     meta_merge     => {
         resources => {
