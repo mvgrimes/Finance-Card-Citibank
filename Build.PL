@@ -9,6 +9,7 @@ my $build = Module::Build->new(
         'Carp'                  => 0,
         'LWP'                   => 0,
         'Crypt::SSLeay'         => 0,
+        'DateTime'              => 0,
         'Class::Accessor::Fast' => 0,
         'HTML::Parser'          => 0,
     },

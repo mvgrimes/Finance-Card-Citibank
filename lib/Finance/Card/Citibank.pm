@@ -10,7 +10,7 @@ use LWP;
 use DateTime;
 use HTML::Parser;
 
-our $VERSION = '2.01';
+our $VERSION = '2.02';
 
 my $ua = LWP::UserAgent->new();
 
@@ -414,14 +414,18 @@ Jon Keller added the ability to pull multiple accounts.
 
 =head1 AUTHOR
 
-Mark Grimes <mgrimes@cpan.org>
+Mark Grimes, E<lt>mgrimes@cpan.orgE<gt>
+
+=for perl-template id="=head1 AUTHOR" md5sum=11d321cd698d426d0121184a785cc216
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2005-10 by mgrimes
+This software is copyright (c) 2010 by Mark Grimes.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself, either Perl version 5.8.2 or,
-at your option, any later version of Perl 5 you may have available.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+
+=for perl-template id="=head1 COPYRIGHT" md5sum=ed388b67604798cc1cd58cb877f07020
 
 =cut
